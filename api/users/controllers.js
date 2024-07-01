@@ -28,4 +28,15 @@ const register = async (req, res, next) => {
   }
 };
 
-module.exports = { generateToken, register };
+const login = async (req, res, next) => {
+  try {
+    req.body.password = await bcrypt.hash(req.body.password, 10);
+    const user = req.user;
+    const token = generateToken(user);
+    return res.status(200).json({ token });
+  } catch (err) {
+    res.status(500).json("Server Error");
+  }
+};
+
+module.exports = { generateToken, register, login };
