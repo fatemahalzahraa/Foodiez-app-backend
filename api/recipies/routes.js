@@ -1,7 +1,20 @@
 const express = require("express");
+const {
+  recipeAdd,
+  addRecipetoIngredient,
+  getRecipebyId,
+} = require("./controllers");
 
-const router = express.Router();
+const recipyRouter = express.Router();
 
-//router.method("url",function)
+recipyRouter.get("/:recipeId", getRecipebyId);
 
-module.exports = router;
+recipyRouter.post(
+  "/:userId/:categoryId",
+  passport.authenticate("jwt", { session: false }),
+  recipeAdd
+);
+
+recipyRouter.put("/:recipeId/:ingredientId", addRecipetoIngredient);
+
+module.exports = recipyRouter;

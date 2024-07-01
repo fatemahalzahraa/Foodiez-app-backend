@@ -8,7 +8,7 @@ const UserSchema = new mongoose.Schema({
   lastname: { type: String },
   website: { type: String },
   bio: { type: String },
-  recipes: [{ type: mongoose.Schema.Types.ObjectId }],
+  recipes: [{ type: mongoose.Schema.Types.ObjectId, ref: "Recipe" }],
 });
 
 module.exports = mongoose.model("User", UserSchema);

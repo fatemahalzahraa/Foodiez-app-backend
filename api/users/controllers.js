@@ -28,4 +28,18 @@ const register = async (req, res, next) => {
   }
 };
 
-module.exports = { generateToken, register };
+const login = async (req, res, next) => {
+  try {
+    // const user = req.user;
+    req.body.password = await bcrypt.hash(req.body.password, 10);
+    const user = await User.findById(req.body);
+
+    const token = generateToken(newUser);
+
+    return res.status(200).json({ token });
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports = { generateToken, register, login };

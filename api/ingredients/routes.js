@@ -1,7 +1,9 @@
 const express = require("express");
 
-const router = express.Router();
+const ingredientRouter = express.Router();
 
-//router.method("url",function)
+const { ingredientAdd } = require("./controllers");
 
-module.exports = router;
+ingredientRouter.post("/", ingredientAdd);
+
+module.exports = ingredientRouter;
