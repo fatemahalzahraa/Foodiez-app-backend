@@ -31,7 +31,7 @@ const register = async (req, res, next) => {
 const login = async (req, res, next) => {
   try {
     const user = req.user;
-    const token = generateToken(newUser);
+    const token = generateToken(user);
     return res.status(200).json({ token });
   } catch (error) {
     next(error);
