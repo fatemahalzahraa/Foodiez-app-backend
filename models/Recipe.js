@@ -9,7 +9,7 @@ const RecipeSchema = new mongoose.Schema({
   ingredients: [{ type: mongoose.Schema.Types.ObjectId }],
   instructions: { type: String },
   category: {},
-  user: {},
+  username: {},
 });
 
 module.exports = mongoose.model("Recipe", RecipeSchema);
