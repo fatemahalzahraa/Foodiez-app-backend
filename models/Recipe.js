@@ -8,8 +8,8 @@ const RecipeSchema = new mongoose.Schema({
   prepTime: { type: String },
   ingredients: [{ type: mongoose.Schema.Types.ObjectId }],
   instructions: { type: String },
-  category: {},
-  username: {},
+  category: { type: mongoose.Schema.Types.ObjectId, ref: "Category" },
+  username: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
 });
 
 module.exports = mongoose.model("Recipe", RecipeSchema);

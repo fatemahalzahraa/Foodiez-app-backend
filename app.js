@@ -6,6 +6,8 @@ const connectDB = require("./database");
 const passport = require("passport");
 const { localStrategy, jwtStrategy } = require("./middlewares/passport");
 const path = require("path");
+const cors = require("cors");
+const recipeRouter = require("./api/recipies/routes");
 
 const app = express();
 
@@ -13,6 +15,9 @@ connectDB();
 
 app.use(express.json());
 // middlewares before routers
+
+app.use(cors());
+
 app.use(passport.initialize());
 passport.use("local", localStrategy);
 passport.use("jwt", jwtStrategy);
@@ -20,6 +25,7 @@ passport.use("jwt", jwtStrategy);
 app.use("/media", express.static(path.join(__dirname, "media")));
 
 app.use(userRoutes);
+app.use("/recipes", recipeRouter);
 //  routers
 
 // middlewares after routers
