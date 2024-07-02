@@ -1,5 +1,13 @@
 const Category = require("../../models/Category");
 
+const getAllCategories = async (req, res, next) => {
+  try {
+    const categories = await Category.find();
+    return res.status(200).json(categories);
+  } catch (error) {
+    return next(error);
+  }
+};
 const addCategory = async (req, res, next) => {
   try {
     const newCategory = await Category.create(req.body);
@@ -7,15 +15,6 @@ const addCategory = async (req, res, next) => {
     res.status(201).json(newCategory);
   } catch (error) {
     next(error);
-  }
-};
-
-const getAllCategories = async (req, res, next) => {
-  try {
-    const categories = await Category.find();
-    return res.status(200).json(categories);
-  } catch (error) {
-    return next(error);
   }
 };
 
