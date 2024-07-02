@@ -7,12 +7,9 @@ const passport = require("passport");
 const { localStrategy, jwtStrategy } = require("./middlewares/passport");
 const path = require("path");
 const morgan = require("morgan");
-
+const cors = require("cors");
 const categoryRouter = require("./api/categories/routes");
 const ingredientRouter = require("./api/ingredients/routes");
-const recipyRouter = require("./api/recipies/routes");
-
-const cors = require("cors");
 const recipeRouter = require("./api/recipies/routes");
 
 const app = express();
@@ -20,6 +17,8 @@ const app = express();
 connectDB();
 
 app.use(express.json());
+
+// middlewares before routers
 
 app.use(morgan("dev"));
 app.use(cors());
@@ -29,6 +28,10 @@ passport.use("local", localStrategy);
 passport.use("jwt", jwtStrategy);
 
 app.use("/media", express.static(path.join(__dirname, "media")));
+
+//  routers
+
+// middlewares after routers
 
 app.use("/user", userRouter);
 app.use("/categories", categoryRouter);

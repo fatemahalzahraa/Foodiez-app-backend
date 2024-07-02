@@ -10,7 +10,7 @@ const RecipeSchema = new mongoose.Schema({
   ingredients: [{ type: mongoose.Schema.Types.ObjectId, ref: "Ingredient" }],
   instructions: { type: String },
   category: { type: mongoose.Schema.Types.ObjectId, ref: "Category" },
-  user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+  username: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
 });
 
 module.exports = mongoose.model("Recipe", RecipeSchema);

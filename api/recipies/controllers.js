@@ -1,7 +1,19 @@
-const User = require("../../models/User");
+
 const Recipe = require("../../models/Recipe");
+const User = require("../../models/User");
 const Category = require("../../models/Category");
 const Ingredient = require("../../models/Ingredient");
+
+
+const getAllRecipies = async (req, res, next) => {
+  try {
+    const recipies = await Recipe.find().populate("username", "name");
+    return res.status(200).json(recipies);
+} catch (error) {
+    next(error);
+  }
+};
+
 
 const getRecipebyId = async (req, res, next) => {
   try {
@@ -12,11 +24,21 @@ const getRecipebyId = async (req, res, next) => {
       return res.status(404).json("No recipe found");
     } else {
       res.status(200).json(recipe);
-    }
-  } catch (error) {
-    next(error);
-  }
-};
+    }   } catch (error) {
+        next(error);
+      }
+    };
+
+//??populate used correctly??
+
+// const getOneRecipe = async (recipeId, next) => {
+//   try {
+//     const recipe = await Recipe.findById(recipeId);
+//     return recipe; 
+// } catch (error) {
+    // next(error);
+//   }
+// };
 
 const addRecipe = async (req, res, next) => {
   try {
@@ -37,11 +59,20 @@ const addRecipe = async (req, res, next) => {
     });
 
     res.status(201).json(newRecipe);
-  } catch (error) {
+} catch (error) {
     next(error);
   }
 };
 
+// const createRecipe = async (req, res, next) => {
+//   try {
+//     req.body.username = req.user._id;
+//     const newRecipe = await Recipe.create(req.body);
+//     return res.status(201).json(newRecipe);
+// } catch (error) {
+//     next(error);
+//   }
+// };
 const addRecipetoIngredient = async (req, res, next) => {
   try {
     const { recipeId, ingredientId } = req.params;
@@ -58,4 +89,6 @@ const addRecipetoIngredient = async (req, res, next) => {
   }
 };
 
-module.exports = { addRecipe, addRecipetoIngredient, getRecipebyId };
+module.exports = { getAllRecipies, createRecipe, addRecipe, addRecipetoIngredient, getRecipebyId };
+
+//getOneRecipe is not imported ask asmaa about it 
