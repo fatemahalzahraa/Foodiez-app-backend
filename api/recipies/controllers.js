@@ -18,7 +18,7 @@ const getRecipebyId = async (req, res, next) => {
   }
 };
 
-const recipeAdd = async (req, res, next) => {
+const addRecipe = async (req, res, next) => {
   try {
     const userId = req.params.userId;
     req.body.user = userId;
@@ -58,4 +58,4 @@ const addRecipetoIngredient = async (req, res, next) => {
   }
 };
 
-module.exports = { recipeAdd, addRecipetoIngredient, getRecipebyId };
+module.exports = { addRecipe, addRecipetoIngredient, getRecipebyId };
