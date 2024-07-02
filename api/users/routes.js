@@ -1,9 +1,17 @@
 const express = require("express");
-const { register } = require("./controllers");
+const { register, login, getAllusers } = require("./controllers");
+const passport = require("passport");
 
-const router = express.Router();
+const userRouter = express.Router();
 
-//router.method("url",function)
-router.post("/register", register);
+userRouter.post("/register", register);
 
-module.exports = router;
+userRouter.post(
+  "/login",
+  passport.authenticate("local", { session: false }),
+  login
+);
+
+userRouter.get("/users", getAllusers);
+
+module.exports = userRouter;

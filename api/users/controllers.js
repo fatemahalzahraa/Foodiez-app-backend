@@ -28,4 +28,22 @@ const register = async (req, res, next) => {
   }
 };
 
-module.exports = { generateToken, register };
+const login = async (req, res, next) => {
+  try {
+    const user = req.user;
+    const token = generateToken(user);
+    return res.status(200).json({ token });
+  } catch (error) {
+    next(error);
+  }
+};
+
+const getAllusers = async (req, res, next) => {
+  try {
+    const users = await User.find();
+    return res.status(200).json(users);
+  } catch (error) {
+    next(error);
+  }
+};
+module.exports = { generateToken, register, login, getAllusers };
