@@ -1,6 +1,6 @@
 const Ingredient = require("../../models/Ingredient");
 
-const addIngredient = async (req, res, next) => {
+const ingredientAdd = async (req, res, next) => {
   try {
     const newIngredient = await Ingredient.create(req.body);
     res.status(201).json(newIngredient);
@@ -17,4 +17,5 @@ const getAllIngredients = async (req, res, next) => {
     return next(error);
   }
 };
-exports.module = { addIngredient, getAllIngredients };
+
+module.exports = { ingredientAdd, getAllIngredients };
