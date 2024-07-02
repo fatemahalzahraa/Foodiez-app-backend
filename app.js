@@ -18,6 +18,8 @@ connectDB();
 
 app.use(express.json());
 
+// middlewares before routers
+
 app.use(morgan("dev"));
 app.use(cors());
 
@@ -26,6 +28,10 @@ passport.use("local", localStrategy);
 passport.use("jwt", jwtStrategy);
 
 app.use("/media", express.static(path.join(__dirname, "media")));
+
+//  routers
+
+// middlewares after routers
 
 app.use("/user", userRouter);
 app.use("/categories", categoryRouter);
