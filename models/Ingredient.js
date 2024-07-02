@@ -5,4 +5,4 @@ const IngredientSchema = new mongoose.Schema({
   recipies: [{ type: mongoose.Schema.Types.ObjectId, ref: "Recipe" }],
 });
 
-module.exports = mongoose.model("Ingredient", IngredientSchema);
+module.exports = mongoose.model("Ingrident", IngredientSchema);

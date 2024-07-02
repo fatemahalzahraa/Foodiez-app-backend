@@ -11,6 +11,7 @@ const ingredientRouter = require("./api/ingredients/routes");
 const recipyRouter = require("./api/recipies/routes");
 const morgan = require("morgan");
 const cors = require("cors");
+const recipeRouter = require("./api/recipies/routes");
 
 const app = express();
 
@@ -27,7 +28,7 @@ passport.use("jwt", jwtStrategy);
 
 app.use("/media", express.static(path.join(__dirname, "media")));
 
-app.use("user", userRouter);
+app.use("/user", userRouter);
 app.use("/categories", categoryRouter);
 app.use("/ingredients", ingredientRouter);
 app.use("/recipies", recipeRouter);
