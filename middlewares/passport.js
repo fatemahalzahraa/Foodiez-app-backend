@@ -27,7 +27,7 @@ const localStrategy = new LocalStrategy(
   }
 );
 
-const jwtstrategy = new JwtStrategy(
+const jwtStrategy = new JwtStrategy(
   {
     jwtFromRequest: fromAuthHeaderAsBearerToken(),
     secretOrKey: process.env.JWT_SECRET,
@@ -51,4 +51,4 @@ const jwtstrategy = new JwtStrategy(
   }
 );
 
-module.exports = { localStrategy, jwtstrategy };
+module.exports = { localStrategy, jwtStrategy };

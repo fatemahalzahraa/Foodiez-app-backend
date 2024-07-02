@@ -4,7 +4,7 @@ const notFound = require("./middlewares/notFoundHandler");
 const errorHandler = require("./middlewares/errorHandler");
 const connectDB = require("./database");
 const passport = require("passport");
-const { localStrategy, jwtstrategy } = require("./middlewares/passport");
+const { localStrategy, jwtStrategy } = require("./middlewares/passport");
 const path = require("path");
 const categoryRouter = require("./api/categories/routes");
 const ingredientRouter = require("./api/ingredients/routes");
@@ -23,14 +23,14 @@ app.use(cors());
 
 app.use(passport.initialize());
 passport.use("local", localStrategy);
-passport.use("jwt", jwtstrategy);
+passport.use("jwt", jwtStrategy);
 
 app.use("/media", express.static(path.join(__dirname, "media")));
 
 app.use("user", userRouter);
 app.use("/categories", categoryRouter);
 app.use("/ingredients", ingredientRouter);
-app.use("/recipies", recipyRouter);
+app.use("/recipies", recipeRouter);
 
 // middlewares after routers
 

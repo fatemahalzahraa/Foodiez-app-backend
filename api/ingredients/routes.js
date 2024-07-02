@@ -2,8 +2,9 @@ const express = require("express");
 
 const ingredientRouter = express.Router();
 
-const { ingredientAdd } = require("./controllers");
+const { addIngredient, getAllIngredients } = require("./controllers");
 
-ingredientRouter.post("/", ingredientAdd);
+ingredientRouter.get("/", getAllIngredients);
+ingredientRouter.post("/", addIngredient);
 
 module.exports = ingredientRouter;
