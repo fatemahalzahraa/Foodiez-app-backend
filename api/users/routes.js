@@ -1,5 +1,5 @@
 const express = require("express");
-const { register, login } = require("./controllers");
+const { register, login, getAllusers } = require("./controllers");
 const passport = require("passport");
 
 const userRouter = express.Router();
@@ -11,5 +11,7 @@ userRouter.post(
   passport.authenticate("local", { session: false }),
   login
 );
+
+userRouter.get("/users", getAllusers);
 
 module.exports = userRouter;

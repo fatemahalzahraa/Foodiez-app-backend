@@ -38,4 +38,12 @@ const login = async (req, res, next) => {
   }
 };
 
-module.exports = { generateToken, register, login };
+const getAllusers = async (req, res, next) => {
+  try {
+    const users = await User.find();
+    return res.status(200).json(users);
+  } catch (error) {
+    next(error);
+  }
+};
+module.exports = { generateToken, register, login, getAllusers };

@@ -4,6 +4,7 @@ const {
   addRecipetoIngredient,
   getRecipebyId,
 } = require("./controllers");
+const passport = require("passport");
 
 const recipeRouter = express.Router();
 
