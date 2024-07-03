@@ -34,7 +34,7 @@ const recipeRouter = express.Router();
 
 recipeRouter.get("/allRecipies", getAllRecipies);
 
-router.param("recipeId", async (req, res, next, recipeId) => {
+recipeRouter.param("recipeId", async (req, res, next, recipeId) => {
   const recipe = await getOneRecipe(recipeId, next);
   if (recipe) {
     req.recipe = recipe;
