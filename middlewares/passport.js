@@ -46,7 +46,7 @@ const jwtStrategy = new JwtStrategy(
     if (!user) {
       return next({ msg: "User not found!" });
     }
-
+    console.log("LGOOOO");
     next(false, user); // req.user
   }
 );
