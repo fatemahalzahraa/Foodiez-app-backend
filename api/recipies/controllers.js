@@ -49,11 +49,14 @@ const getRecipebyId = async (req, res, next) => {
 
 const addRecipe = async (req, res, next) => {
   try {
-    req.file ? (req.body.image = req.file.path) : "";
-    const userId = req.params.userId;
+    if (req.file) {
+      req.body.image = req.file.path;
+    }
+
+    const userId = req.user._id;
     req.body.user = userId;
 
-    const categoryId = req.params.categoryId;
+    const categoryId = req.body.cuisine;
     req.body.category = categoryId;
 
     const newRecipe = await Recipe.create(req.body);
@@ -65,6 +68,13 @@ const addRecipe = async (req, res, next) => {
     await Category.findByIdAndUpdate(categoryId, {
       $push: { recipies: newRecipe._id },
     });
+
+    await Ingredient.updateMany(
+      { _id: req.body.ingredients },
+      {
+        $push: { recipies: newRecipe._id },
+      }
+    );
 
     res.status(201).json(newRecipe);
   } catch (error) {

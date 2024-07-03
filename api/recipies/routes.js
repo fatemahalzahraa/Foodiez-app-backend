@@ -9,6 +9,7 @@ const {
 } = require("./controllers");
 const passport = require("passport");
 const upload = require("../../middlewares/multer");
+
 const recipeRouter = express.Router();
 
 // router.param("recipeId", async (req, res, next, recipeId) => {
@@ -49,8 +50,8 @@ recipeRouter.get("/:recipeId", getRecipebyId);
 
 recipeRouter.post(
   "/:userId/:categoryId",
-  upload.single("image"),
   passport.authenticate("jwt", { session: false }),
+  upload.single("image"),
   addRecipe
 );
 
