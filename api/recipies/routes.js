@@ -34,22 +34,22 @@ const recipeRouter = express.Router();
 
 recipeRouter.get("/allRecipies", getAllRecipies);
 
-recipeRouter.param("recipeId", async (req, res, next, recipeId) => {
-  const recipe = await getOneRecipe(recipeId, next);
-  if (recipe) {
-    req.recipe = recipe;
-    next();
-  } else {
-    const error = new Error("Recipe Not Found");
-    error.status = 404;
-    next(error);
-  }
-});
+// recipeRouter.param("recipeId", async (req, res, next, recipeId) => {
+//   const recipe = await getOneRecipe(recipeId, next);
+//   if (recipe) {
+//     req.recipe = recipe;
+//     next();
+//   } else {
+//     const error = new Error("Recipe Not Found");
+//     error.status = 404;
+//     next(error);
+//   }
+// });
 
 recipeRouter.get("/:recipeId", getRecipebyId);
 
 recipeRouter.post(
-  "/",
+  "/:userId/:categoryId",
   passport.authenticate("jwt", { session: false }),
   upload.single("image"),
   addRecipe

@@ -62,11 +62,11 @@ const addRecipe = async (req, res, next) => {
     const newRecipe = await Recipe.create(req.body);
 
     await User.findByIdAndUpdate(userId, {
-      $push: { recipes: newRecipe._id },
+      $push: { recipies: newRecipe._id },
     });
 
     await Category.findByIdAndUpdate(categoryId, {
-      $push: { recipes: newRecipe._id },
+      $push: { recipies: newRecipe._id },
     });
 
     await Ingredient.updateMany(
@@ -82,15 +82,6 @@ const addRecipe = async (req, res, next) => {
   }
 };
 
-// const createRecipe = async (req, res, next) => {
-//   try {
-//     req.body.username = req.user._id;
-//     const newRecipe = await Recipe.create(req.body);
-//     return res.status(201).json(newRecipe);
-// } catch (error) {
-//     next(error);
-//   }
-// };
 const addRecipetoIngredient = async (req, res, next) => {
   try {
     const { recipeId, ingredientId } = req.params;
@@ -99,7 +90,7 @@ const addRecipetoIngredient = async (req, res, next) => {
       $push: { ingredients: ingredientId },
     });
     await Ingredient.findByIdAndUpdate(ingredientId, {
-      $push: { recipes: recipeId },
+      $push: { recipies: recipeId },
     });
     return res.status(204).end();
   } catch (error) {
