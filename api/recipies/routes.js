@@ -8,6 +8,7 @@ const {
   addRecipetoIngredient,
 } = require("./controllers");
 const passport = require("passport");
+const upload = require("../../middlewares/multer");
 const recipeRouter = express.Router();
 
 // router.param("recipeId", async (req, res, next, recipeId) => {
@@ -32,22 +33,23 @@ const recipeRouter = express.Router();
 
 recipeRouter.get("/allRecipies", getAllRecipies);
 
-router.param("recipeId", async (req, res, next, recipeId) => {
-  const recipe = await getOneRecipe(recipeId, next);
-  if (recipe) {
-    req.recipe = recipe;
-    next();
-  } else {
-    const error = new Error("Recipe Not Found");
-    error.status = 404;
-    next(error);
-  }
-});
+// recipeRouter.param("recipeId", async (req, res, next, recipeId) => {
+//   const recipe = await getOneRecipe(recipeId, next);
+//   if (recipe) {
+//     req.recipe = recipe;
+//     next();
+//   } else {
+//     const error = new Error("Recipe Not Found");
+//     error.status = 404;
+//     next(error);
+//   }
+// });
 
 recipeRouter.get("/:recipeId", getRecipebyId);
 
 recipeRouter.post(
   "/:userId/:categoryId",
+  upload.single("image"),
   passport.authenticate("jwt", { session: false }),
   addRecipe
 );
