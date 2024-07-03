@@ -5,7 +5,6 @@ const UserSchema = new mongoose.Schema({
   password: { type: String, required: true },
   image: { type: String },
   firstname: { type: String },
-  lastname: { type: String },
   website: { type: String },
   bio: { type: String },
   recipes: [{ type: mongoose.Schema.Types.ObjectId, ref: "Recipe" }],
