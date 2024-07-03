@@ -6,14 +6,16 @@ const {
   getRecipebyId,
 } = require("./controllers");
 const passport = require("passport");
+const upload = require("../../middlewares/multer");
 
 const recipeRouter = express.Router();
 
 recipeRouter.get("/:recipeId", getRecipebyId);
 
 recipeRouter.post(
-  "/:userId/:categoryId",
+  "/",
   passport.authenticate("jwt", { session: false }),
+  upload.single("image"),
   addRecipe
 );
 
