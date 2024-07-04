@@ -65,8 +65,14 @@ const getOneUser = async (req, res, next) => {
   }
 };
 const UpdateProfile = async (req, res, next) => {
+  console.log(req.file);
   const id = req.params.id;
+  console.log("testfdsfsdf");
   try {
+    console.log("test", req.file);
+    if (req.file) {
+      req.body.image = `${req.file.path.replace("\\", "/")}`;
+    }
     const user = await User.findByIdAndUpdate(id, req.body);
     res.status(200).json(user);
   } catch (error) {
